@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rechman\\source\\repos\\FunctionApp\\FunctionApp.csproj": {}
+    "C:\\Users\\rechman\\source\\repos\\Mesh\\FunctionApp\\FunctionApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rechman\\source\\repos\\FunctionApp\\FunctionApp.csproj": {
+    "C:\\Users\\rechman\\source\\repos\\Mesh\\FunctionApp\\FunctionApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rechman\\source\\repos\\FunctionApp\\FunctionApp.csproj",
+        "projectUniqueName": "C:\\Users\\rechman\\source\\repos\\Mesh\\FunctionApp\\FunctionApp.csproj",
         "projectName": "FunctionApp",
-        "projectPath": "C:\\Users\\rechman\\source\\repos\\FunctionApp\\FunctionApp.csproj",
+        "projectPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\FunctionApp\\FunctionApp.csproj",
         "packagesPath": "C:\\Users\\rechman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rechman\\source\\repos\\FunctionApp\\obj\\",
+        "outputPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\FunctionApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -35,8 +35,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\rechman\\source\\repos\\Shared\\Shared.csproj": {
-                "projectPath": "C:\\Users\\rechman\\source\\repos\\Shared\\Shared.csproj"
+              "C:\\Users\\rechman\\source\\repos\\Mesh\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Shared\\Shared.csproj"
               }
             }
           }
@@ -51,6 +51,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.Azure.Functions.Extensions": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.NET.Sdk.Functions": {
               "target": "Package",
               "version": "[4.1.1, )"
@@ -76,14 +88,14 @@
         }
       }
     },
-    "C:\\Users\\rechman\\source\\repos\\Models\\Models.csproj": {
+    "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rechman\\source\\repos\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\rechman\\source\\repos\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\rechman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rechman\\source\\repos\\Models\\obj\\",
+        "outputPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -118,6 +130,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[11.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -138,14 +156,14 @@
         }
       }
     },
-    "C:\\Users\\rechman\\source\\repos\\Shared\\Shared.csproj": {
+    "C:\\Users\\rechman\\source\\repos\\Mesh\\Shared\\Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rechman\\source\\repos\\Shared\\Shared.csproj",
+        "projectUniqueName": "C:\\Users\\rechman\\source\\repos\\Mesh\\Shared\\Shared.csproj",
         "projectName": "Shared",
-        "projectPath": "C:\\Users\\rechman\\source\\repos\\Shared\\Shared.csproj",
+        "projectPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Shared\\Shared.csproj",
         "packagesPath": "C:\\Users\\rechman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rechman\\source\\repos\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -169,8 +187,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\rechman\\source\\repos\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\rechman\\source\\repos\\Models\\Models.csproj"
+              "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\Models.csproj"
               }
             }
           }
@@ -184,6 +202,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[11.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

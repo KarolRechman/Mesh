@@ -1,6 +1,6 @@
 ﻿namespace Models;
 
-class Node
+public class Node
 {
 	public int Id { get; set; }
 	public double X { get; set; }

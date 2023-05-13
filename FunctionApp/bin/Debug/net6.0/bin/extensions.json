@@ -1,4 +1,5 @@
 {
   "extensions":[
+    { "name": "Startup", "typeName":"FunctionApp.Startup, FunctionApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"}
   ]
 }

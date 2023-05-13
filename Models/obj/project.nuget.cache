@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Sx0VUV52Pg+DKtVSeEHIRRhdFZx85UbxTo/rBH/KFl1AYfM0ApMstPdaL2sc9nidzvpvPhw26729j6aSLhl6pA==",
+  "dgSpecHash": "Dxh7PTy3r7ScrSIZQ7x3l5GuZmNt9JxmGqMp7UBJI6VmML0koA64tn997YGf/GOw94MNXZLCOxRDX1SnINtzAQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rechman\\source\\repos\\Models\\Models.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\rechman\\source\\repos\\Mesh\\Models\\Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rechman\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

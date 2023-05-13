@@ -1,6 +1,8 @@
-﻿namespace Models;
+﻿using System.Text.Json.Serialization;
 
-class Element
+namespace Models;
+
+public class Element
 {
 	public int Id { get; set; }
 	public List<int> Nodes { get; set; }
