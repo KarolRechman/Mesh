@@ -1,0 +1,5 @@
+C:\Users\rechman\source\repos\Shared\obj\Debug\net6.0\Shared.csproj.AssemblyReference.cache
+C:\Users\rechman\source\repos\Shared\obj\Debug\net6.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rechman\source\repos\Shared\obj\Debug\net6.0\Shared.AssemblyInfoInputs.cache
+C:\Users\rechman\source\repos\Shared\obj\Debug\net6.0\Shared.AssemblyInfo.cs
+C:\Users\rechman\source\repos\Shared\obj\Debug\net6.0\Shared.csproj.CoreCompileInputs.cache
