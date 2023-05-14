@@ -29,6 +29,8 @@ This is a Serverless Azure functions project (HTTP trigger function). Using .Net
 4. Run app
 5. Prepere an Http POST request in Insomnia or Postman
 * add parameters:
+* Name: mesh, type: json file, 
+* Name: numberOfSpots, type: value (integer)
 ![image](https://github.com/KarolRechman/Mesh/assets/39775135/f419945a-3c1c-41e5-a0c6-458b90b43b48)
 ![image](https://github.com/KarolRechman/Mesh/assets/39775135/50b23dd3-3b79-4c58-8d01-61c50a180927)
 6. Test application by making an HTTP request, to your local host, like this:  http://localhost:7275/api/MeshFunction
