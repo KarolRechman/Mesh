@@ -10,6 +10,6 @@ namespace Shared.Services
 {
 	public interface IMeshService
 	{
-		Task<List<ViewSpot>> FindViewSpots(HttpRequest request);
+		Task<List<ViewSpot>?> FindViewSpots(HttpRequest request);
 	}
 }

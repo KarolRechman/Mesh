@@ -2,42 +2,50 @@
 using Models;
 using Newtonsoft.Json;
 using System.Text;
+using Shared.Helpers;
 
 namespace Shared.Services;
 
 public class MeshService : IMeshService
 {
-	private ILoggerService _loggerService;
+	private readonly ViewSpotFinderHelper _viewSpotFinderHelper;
 
 	public MeshService(ILoggerService loggerService)
 	{
-		_loggerService = loggerService;
+		_viewSpotFinderHelper = new ViewSpotFinderHelper(loggerService);
 	}
 
-	public async Task<List<ViewSpot>> FindViewSpots(HttpRequest request)
+	public async Task<List<ViewSpot>?> FindViewSpots(HttpRequest request)
 	{
-		var formParams = await RetrieveParams(request);
-		var mesh = formParams.Mesh;
-		var viewSpots = new List<ViewSpot>();
+		FormParams formParams = await _viewSpotFinderHelper.RetrieveParams(request);
 
-		// Create a dictionary to map element IDs to their values
-		var elementValues = mesh.Values.ToDictionary(v => v.ElementId, v => v.Value);
-
-		// Create a dictionary to map nodes to the elements they belong to
-		var nodeElements = mesh.Elements.SelectMany(e => e.Nodes.Select(n => new { NodeId = n, ElementId = e.Id }))
-			.ToLookup(ne => ne.NodeId, ne => ne.ElementId);
-
-		// Create a priority queue to store elements sorted by value (highest first)
-		var queue = new SortedSet<int>(Comparer<int>.Create((x, y) => elementValues[y].CompareTo(elementValues[x])));
-
-		// Add all elements to the queue
-		foreach (var element in mesh.Elements)
+		if (formParams.Mesh.Values == null)
 		{
-			queue.Add(element.Id);
+			return null;
 		}
 
+		// Create a dictionary to map element IDs to their values
+		Dictionary<int, double> elementValues = _viewSpotFinderHelper.PrepareElementValues(formParams.Mesh);
+
+		// Create a dictionary to map nodes to the elements they belong to
+		ILookup<int, int> nodeElements = _viewSpotFinderHelper.PrepareNodeElements(formParams.Mesh);
+
+		// Create a priority queue to store elements sorted by value (highest first)
+		var queue = _viewSpotFinderHelper.PrepareQueue(elementValues, formParams.Mesh.Elements);
+
 		// Process elements in the queue until we have found n view spots or the queue is empty
-		while (viewSpots.Count < formParams.NumberOfSpots && queue.Count > 0)
+		return GetViewSpotsFromQueue(formParams, queue, nodeElements, elementValues);
+	}
+
+	private static List<ViewSpot> GetViewSpotsFromQueue(FormParams formParams, SortedSet<int> queue, ILookup<int, int> nodeElements, Dictionary<int, double> elementValues)
+	{
+		var tolerance = Math.Abs(double.MinValue);
+		var viewSpots = new List<ViewSpot>();
+
+		Mesh mesh = formParams.Mesh;
+		int numberOfSpots = formParams.NumberOfSpots;
+
+		while (viewSpots.Count < numberOfSpots && queue.Count > 0)
 		{
 			// Get the element with the highest value from the queue
 			var elementId = queue.First();
@@ -56,6 +64,7 @@ public class MeshService : IMeshService
 						break;
 					}
 				}
+
 				if (!isViewSpot)
 				{
 					break;
@@ -63,7 +72,7 @@ public class MeshService : IMeshService
 			}
 
 			// Add the element to the list of view spots if it is a view spot
-			if (isViewSpot)
+			if (!isViewSpot) continue;
 			{
 				viewSpots.Add(new ViewSpot { ElementId = elementId, Value = elementValues[elementId] });
 
@@ -73,7 +82,7 @@ public class MeshService : IMeshService
 					var neighborElements = nodeElements[nodeId].Where(ne => ne != elementId);
 					foreach (var neighborElementId in neighborElements)
 					{
-						if (elementValues[neighborElementId] == elementValues[elementId])
+						if (Math.Abs(elementValues[neighborElementId] - elementValues[elementId]) < tolerance)
 						{
 							queue.Remove(neighborElementId);
 						}
@@ -83,47 +92,5 @@ public class MeshService : IMeshService
 		}
 
 		return viewSpots;
-	}
-
-	public async Task<FormParams> RetrieveParams(HttpRequest request)
-	{
-		try
-		{
-			IFormCollection? formData = await request.ReadFormAsync();
-			IFormFile file = formData?.Files["mesh"] ?? throw new InvalidOperationException();
-			var numberOfSpots = int.Parse(request.Form["numberOfSpots"]);
-
-			return new FormParams()
-			{
-				Mesh = DeserializeJsonFromFile(file),
-				NumberOfSpots = numberOfSpots,
-			};
-		}
-		catch (Exception e)
-		{
-			_loggerService.Log(e.Message);
-			throw;
-		}
-	}
-
-	private Mesh DeserializeJsonFromFile(IFormFile file)
-	{
-		using (var stream = new MemoryStream())
-		{
-			try
-			{
-				file.CopyTo(stream);
-				byte[] data = stream.ToArray();
-
-				var mesh = JsonConvert.DeserializeObject<Mesh>(Encoding.UTF8.GetString(data));
-
-				return mesh;
-			}
-			catch (Exception e)
-			{
-				_loggerService.Log(e.Message);
-				throw;
-			}
-		}
 	}
 }
