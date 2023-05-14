@@ -10,7 +10,7 @@ The programme is generally fast, taking about 1 second for 10,000 items and abou
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is a project made in Azure functions (HTTP trigger function). Using .Net 6, developed in Visual Studio 2022
+This is a Serverless Azure functions project (HTTP trigger function). Using .Net 6, developed in Visual Studio 2022
 
 ### Prerequisites
 
